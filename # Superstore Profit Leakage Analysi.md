@@ -44,7 +44,6 @@ what corrective actions can be taken.
 
 | Stakeholder | Interest |
 
-|-------------|----------|
 
 | Sales Director | Identify underperforming regions |
 
