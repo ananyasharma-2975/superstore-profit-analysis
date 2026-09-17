@@ -1,0 +1,55 @@
+create database IF NOT EXISTS superstore_db;
+use superstore_db;
+ 
+ select count(*) from superstore;
+ 
+ select Region,
+        ROUND(SUM(SALES), 2) AS TOTAL_REVENUE,
+        ROUND(SUM(PROFIT), 2) AS TOTAL_PROFIT,
+        ROUND((SUM(PROFIT) / SUM(SALES)) *100, 2) AS PROFIT_MARGIN_PCT
+FROM SUPERSTORE
+GROUP BY REGION
+ORDER BY TOTAL_REVENUE DESC;
+
+SELECT CATEGORY,
+	   ROUND(SUM(SALES), 2) AS TOTAL_SALES,
+       ROUND(SUM(PROFIT), 2) AS TOTAL_PROFIT,
+       ROUND((SUM(PROFIT)/SUM(SALES)) *100, 2) AS PROFIT_MARGIN_PCT
+FROM SUPERSTORE
+GROUP BY CATEGORY
+ORDER BY PROFIT_MARGIN_PCT DESC;
+
+SELECT
+CASE WHEN Discount = 0 THEN 'No Discount'
+WHEN Discount <= 0.2 THEN 'Low'
+WHEN Discount <= 0.4 THEN 'Medium'
+ELSE 'High'
+END AS Discount_Range,
+ROUND(AVG(Profit), 2) AS Avg_Profit,
+COUNT(*) AS Total_Orders
+FROM superstore
+GROUP BY Discount_Range
+ORDER BY Avg_Profit DESC;
+
+SELECT `PRODUCT NAME`,ROUND(SUM(PROFIT), 2) AS TOTAL_PROFIT
+FROM SUPERSTORE 
+GROUP BY `PRODUCT NAME`
+HAVING SUM(PROFIT) < 0
+ORDER BY SUM(PROFIT) ASC
+LIMIT 10;
+
+SELECT Segment,
+ROUND(SUM(Sales), 2) AS Total_Sales,
+ROUND(SUM(Profit), 2) AS Total_Profit,
+ROUND((SUM(Profit)/SUM(Sales))*100, 2) AS Profit_Margin_Pct
+FROM superstore
+GROUP BY Segment
+ORDER BY Profit_Margin_Pct DESC;
+
+
+
+
+
+
+
+
